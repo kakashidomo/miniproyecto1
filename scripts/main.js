@@ -1,24 +1,25 @@
-let btn = document.querySelector('#addEmailbtn')
-let inputEmail = document.querySelector('#emailInput')
-let errors = []
-//let modalBtn = document.querySelector('#modal-button')
-console.log(inputEmail);
+document.addEventListener('DOMContentLoaded', () => {
+    const addEmailBtn = document.getElementById('addEmailbtn');
+    const emailInput = document.getElementById('emailInput');
+    const modal = document.getElementById('modal');
+    const alertMessage = document.getElementById('alerta');
+    const dismissButton = document.getElementById('modalDismissButton');
 
-btn.addEventListener("click", function (event) { 
-    event.preventDefault()
-    inputEmail.forEach(function (field) {
-        if (inputEmail.value == "") {
-            inputEmail.classList.add("errorField")
-            errors.push(field.id)
+    const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
+
+    addEmailBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const emailValue = emailInput.value.trim();
+
+        if (!isValidEmail(emailValue)) {
+            alertMessage.classList.remove('d-none');
+        } else {
+            alertMessage.classList.add('d-none');
+            modal.classList.remove('d-none');
         }
-    })
-    alerta
-})
+    });
 
-
-/*
-
-//Funcion validar correo
-//funcion suscribirse
-//Funcion limpiar celda */
-
+    dismissButton.addEventListener('click', () => {
+        modal.classList.add('d-none');
+    });
+});
